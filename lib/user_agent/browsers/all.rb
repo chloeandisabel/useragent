@@ -70,6 +70,11 @@ class UserAgent
           false
         end
       end
+      
+      def robot?
+        !!(browser =~ /(google|bot|yahoo|spider|archiver|curl|python|nambu|twitt|perl|sphere|PEAR|java|wordpress|radian|crawl|yandex|eventbox|monitor|mechanize|facebookexternal|crawler)/i)
+      end
+      
 
       private
         def detect_product(product)

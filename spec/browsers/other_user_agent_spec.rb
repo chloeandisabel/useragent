@@ -164,3 +164,23 @@ describe "UserAgent: 'check_http/v1.4.15 (nagios-plugins 1.4.15)'" do
   it { @useragent.os.should be_nil }
   it { @useragent.should_not be_mobile }
 end
+
+describe "robots" do
+  sample_bots = <<-EOF
+Yahoo-VerticalCrawler-FormerWebCrawler/3.9 crawler at trd dot overture dot com; http://www.alltheweb.com/help/webmaster/crawler
+YahooSeeker/1.0 (compatible; Mozilla 4.0; MSIE 5.5; http://help.yahoo.com/help/us/shop/merchant/)
+googlebot (larbin2.6.0@unspecified.mail)
+Googlebot-Image/1.0
+Googlebot/2.1 ( http://www.google.com/bot.html)
+msnbot 
+msnbot-NewsBlogs/1.0 (+http://search.msn.com/msnbot.htm)
+EOF
+
+  sample_bots.lines.each do |browser_string| 
+    it "should return bot for #{browser_string}" do
+      @useragent = UserAgent.parse(browser_string)
+      @useragent.robot?.should be_true
+    end
+  end
+end
+
