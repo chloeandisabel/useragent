@@ -63,7 +63,7 @@ class UserAgent
           true
         elsif detect_product('Mobile')
           true
-        elsif application.comment &&
+        elsif application && application.comment &&
             application.comment.detect { |k, v| k =~ /^IEMobile/ }
           true
         else
